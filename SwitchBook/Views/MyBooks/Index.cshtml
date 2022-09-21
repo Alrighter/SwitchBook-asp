@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SwitchBook.Models.Book>
+
+@{
+    ViewData["Title"] = "Мої книги";
+}
+
+<h1>Мої книги</h1>
+
+<p>
+    <a asp-controller="Books" asp-action="Create" class="btn btn_book">Додати книгу</a>
+</p>
+
+<div class="avaliable_books">
+    @foreach (var item in Model)
+    {
+        <div class="avaliable_book">
+            @if (item.Image != null)
+            {
+                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))"/>
+            }
+            else
+            {
+                <div class="avaliable_book_image"></div>
+            }
+            <div class="avaliable_book_text">
+                <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+                <hr/>
+                <h5>@Html.DisplayFor(modelItem => item.Author)</h5>
+                <h6 class="avaliable_book_text_description">@Html.DisplayFor(modelItem => item.Description)</h6>
+                <div class="avaliable_book_text_buttons">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn_book">Редагувати</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn_book">Видалити</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

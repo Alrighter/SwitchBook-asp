@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Деталі пропозиції";
+}
+
+<div class="trade_offers">
+    <h3>Деталі пропозиції</h3>
+    <div class="trade_offers_overflow">
+        <div class="trade_offers_offer">
+            <div class="trade_offers_text">
+                <div class="offer_details">
+                    <div class="avaliable_book">
+                        @if (@ViewBag.Book1.Image != null)
+                        {
+                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@ViewBag.Book1.Image))"/>
+                        }
+                        else
+                        {
+                            <div class="avaliable_book_image"></div>
+                        }
+                        <div>
+                            <h4>@ViewBag.Book1.Title</h4>
+                            <hr/>
+                            <h5>@ViewBag.Book1.Author</h5>
+                            <h6>Віддаєте</h6>
+                        </div>
+                    </div>
+                    <div class="offer_book_details">
+                        <p>Назва: "@ViewBag.Book1.Title"</p>
+                        <p>Автор: @ViewBag.Book1.Author</p>
+                        <p>Відгук: @ViewBag.Book1.Description</p>
+                        <p>Місто: @ViewBag.Address1.City</p>
+                        <p>Номер телефону: @ViewBag.Address1.PhoneNumber</p>
+                    </div>
+                </div>
+                
+
+                <div class="offer_details" style="flex-direction: row-reverse;">
+                    <div class="avaliable_book">
+                        @if (@ViewBag.Book2.Image != null)
+                        {
+                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@ViewBag.Book2.Image))"/>
+                        }
+                        else
+                        {
+                            <div class="avaliable_book_image"></div>
+                        }
+                        <div>
+                            <h4>@ViewBag.Book2.Title</h4>
+                            <hr/>
+                            <h5>@ViewBag.Book2.Author</h5>
+                            <h6>Отримуєте</h6>
+                        </div>
+                    </div>
+                    <div class="offer_book_details">
+                        <p>Назва: "@ViewBag.Book2.Title"</p>
+                        <p>Автор: @ViewBag.Book2.Author</p>
+                        <p>Відгук: @ViewBag.Book2.Description</p>
+                        <p>Місто: @ViewBag.Address2.City</p>
+                        <p>Номер телефону: @ViewBag.Address2.PhoneNumber</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="trade_offers_action">
+        <a asp-action="Index" class="btn btn_book">Повернутися</a>
+    </div>
+</div>

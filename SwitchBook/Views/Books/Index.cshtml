@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SwitchBook.Models.Book>
+
+@{
+    ViewData["Title"] = "Пошук книги";
+}
+
+<h1>Доступні книги</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn_book">Додати книгу</a>
+</p>
+<form asp-action="Index" class="book_search">
+    <input type="text" name="query"/>
+    <input type="submit" value="Пошук"/>
+</form>
+
+<div class="avaliable_books">
+    @foreach (var item in Model)
+    {
+        <a class="avaliable_book" asp-action="Details" asp-route-id="@item.Id">
+            @if (item.Image != null)
+            {
+                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))"/>
+            }
+            else
+            {
+                <div class="avaliable_book_image"></div>
+            }
+            <div class="avaliable_book_text">
+                <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+                <hr/>
+                <h5>@Html.DisplayFor(modelItem => item.Author)</h5>
+                <h6 maxlength="1">@Html.DisplayFor(modelItem => item.Description)</h6>
+            </div>
+        </a>
+    }
+</div>

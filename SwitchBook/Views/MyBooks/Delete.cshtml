@@ -1,0 +1,46 @@
+﻿@model SwitchBook.Models.Book
+
+@{
+    ViewData["Title"] = "Видалити";
+}
+
+<h1>Видалити "@Model.Title"</h1>
+
+<h3 style="margin-bottom: 20px;">Ви справді хочете видалити цю книгу зі списку?</h3>
+
+<div class="row book_details">
+    <div class="col-md-3">
+        @if (Model.Image != null)
+        {
+            <img style="width: 100%;" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))" />
+        }
+    </div>
+    <dl class="col-md-9">
+        <dt class = "col-sm-2">
+            Назва
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            Автор
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt class = "col-sm-2">
+            Відгук
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div class="book_buttons">
+    <hr/>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Видалити" class="btn btn_book" />
+        <a asp-action="Index"  class="btn btn_book">Повернутися</a>
+    </form>
+</div>

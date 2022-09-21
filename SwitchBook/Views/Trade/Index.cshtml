@@ -1,0 +1,58 @@
+﻿@model SwitchBook.ViewModels.TradeViewModel
+
+@{
+    ViewData["Title"] = "Обмін";
+}
+<h2>Обмін</h2>
+
+<div>
+    <div class="book_trade">
+        <div class="book_trade_book">
+            <h5>Обміняти книгу</h5>
+            <div class="avaliable_book" style="height: fit-content;">
+                @if (Model.Book.Image != null)
+                {
+                    <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Book.Image))"/>
+                }
+                <div class="avaliable_book_text">
+                    <h4>@Html.DisplayFor(modelItem => Model.Book.Title)</h4>
+                    <hr/>
+                    <h5>@Html.DisplayFor(modelItem => Model.Book.Author)</h5>
+                </div>
+            </div>
+        </div>
+        <div class="book_trade_book">
+            <h5>На книгу</h5>
+                <div class="book_trade_choice">
+                @foreach (var item in Model.MyBooks)
+                {
+                    <form asp-action="Create" method="post" asp-controller="Trade">
+                        <input type="hidden" value="@ViewBag.bookId" name="bookId"/>
+                        <input type="hidden" value="@item.Id" name="myBookId"/>
+                        <div class="avaliable_book">
+                            @if (item.Image != null)
+                            {
+                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))"/>
+                            }
+                            else
+                            {
+                                <div class="avaliable_book_image"></div>
+                            }
+                            <div class="avaliable_book_text">
+                                <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+                                <hr/>
+                                <h5>@Html.DisplayFor(modelItem => item.Author)</h5>
+                                <input type="submit" class="btn btn_book" value="Обрати">
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<hr/>
+
+
