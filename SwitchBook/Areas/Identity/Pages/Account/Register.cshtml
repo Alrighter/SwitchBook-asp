@@ -1,97 +1,69 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Зареєструватися";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-4">
+<div>
+    <div class="d-flex justify-content-center">
         <form enctype="multipart/form-data" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
+            <h4>Створити новий аккаунт.</h4>
+            <hr/>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
+                <label asp-for="Input.Email">Електронна пошта</label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+                <label asp-for="Input.Password">Пароль</label>
+                <input asp-for="Input.Password" class="form-control"/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <label asp-for="Input.ConfirmPassword">Підтвердження паролю</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control"/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Avatar"></label>
-                <input asp-for="Input.Avatar" class="form-control" style="padding: 3px; height: min-content;"/>
+                <label asp-for="Input.Avatar">Мармизка</label>
+                <input asp-for="Input.Avatar" class="form-control" style="height: min-content; padding: 3px;"/>
                 <span asp-validation-for="Input.Avatar" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Region"></label>
-                <input asp-for="Input.Region" class="form-control" />
+                <label asp-for="Input.Region">Область</label>
+                <input asp-for="Input.Region" class="form-control"/>
                 <span asp-validation-for="Input.Region" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.City"></label>
-                <input asp-for="Input.City" class="form-control" />
+                <label asp-for="Input.City">Місто</label>
+                <input asp-for="Input.City" class="form-control"/>
                 <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Street"></label>
-                <input asp-for="Input.Street" class="form-control" />
+                <label asp-for="Input.Street">Вулиця</label>
+                <input asp-for="Input.Street" class="form-control"/>
                 <span asp-validation-for="Input.Street" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.PostalCode"></label>
-                <input asp-for="Input.PostalCode" class="form-control" />
+                <label asp-for="Input.PostalCode">Поштовий індекс</label>
+                <input asp-for="Input.PostalCode" class="form-control"/>
                 <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <label asp-for="Input.PhoneNumber">Номер телефону</label>
+                <input asp-for="Input.PhoneNumber" class="form-control"/>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn_book">Зареєструватися</button>
+            </div>
         </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to register.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        //<p>
-                        //    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                        //    for details on setting up this ASP.NET application to support logging in via external services.
-                        //</p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

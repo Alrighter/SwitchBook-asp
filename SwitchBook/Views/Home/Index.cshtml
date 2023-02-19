@@ -1,9 +1,20 @@
 ﻿@model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Домашня сторінка";
 }
 
+<link rel="stylesheet" href="~/css/home.css">
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="home_page">
+        <div class="text">
+            <h3 class="home_text_title">
+                ОБМІНЯЙ СТАРУ КНИГУ НА НОВУ
+            </h3>
+            <p class="home_text_filling">
+                Перша друкована книга з’явилася у Львові 1574 р. З тих пір вийшло багато книг. Сайт об'єднує шанувальників друкованої літератури, тож ви можете обміняти прочитану книгу на книгу, яку хотіли б прочитати. Веб-сайт абсолютно безкоштовний і підтримується пожертвами від вдячних користувачів.
+            </p>
+        </div>
+        <img src="https://raw.githubusercontent.com/Alrighter/SwitchBook/main/img/books_on_homepage.png" alt="Some books here" class="books_on_homepage">
+    </div>
 </div>

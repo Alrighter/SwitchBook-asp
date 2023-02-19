@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace SwitchBook.Models
 {
@@ -6,5 +7,6 @@ namespace SwitchBook.Models
     {
         public byte[] Avatar { get; set; }
         public int AddressId { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

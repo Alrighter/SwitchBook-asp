@@ -1,0 +1,77 @@
+﻿.contacts_arrow {
+    margin-left: 250px;
+    width: 200px;
+    mix-blend-mode: luminosity;
+    transform: scale(-1, 1);
+}
+
+.contact_title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 59px;
+    width: 100%;
+    color: #4C4333;
+}
+
+.main_email_icon {
+    height: 100px;
+}
+
+.contact_text, .contact_extra_text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 41px;
+    color: #4C4333;
+}
+
+.contact_text {
+    position: relative;
+    width: 70%;
+}
+
+.contact_extra_text {
+    position: relative;
+    margin-top: 40px;
+    margin-left: 20%;
+}
+
+@media only screen and (max-width: 700px) {
+    .contact_text {
+        position: relative;
+        width: 100%;
+    }
+
+    .contact_extra_text {
+        position: relative;
+        margin-top: 40px;
+        margin-left: 0%;
+    }
+}
+
+@media only screen and (max-width: 725px) {
+    .contact_title {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 30px;
+    }
+
+    .contact_text, .contact_extra_text {
+        font-size: 24px;
+        line-height: 26px;
+    }
+
+    .main_email_icon {
+        display: none;
+    }
+
+    .contacts_arrow {
+        margin: 0;
+        bottom: 50px;
+        width: 100px;
+        margin-left: 250px;
+    }
+}

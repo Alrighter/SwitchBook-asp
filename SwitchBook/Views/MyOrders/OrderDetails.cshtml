@@ -9,9 +9,9 @@
             <div class="trade_offers_text">
                 <div class="offer_details">
                     <div class="avaliable_book">
-                        @if (@ViewBag.Book1.Image != null)
+                        @if (ViewBag.Book1.Image != null)
                         {
-                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@ViewBag.Book1.Image))"/>
+                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.Book1.Image))"/>
                         }
                         else
                         {
@@ -32,13 +32,13 @@
                         <p>Номер телефону: @ViewBag.Address1.PhoneNumber</p>
                     </div>
                 </div>
-                
+
 
                 <div class="offer_details" style="flex-direction: row-reverse;">
                     <div class="avaliable_book">
-                        @if (@ViewBag.Book2.Image != null)
+                        @if (ViewBag.Book2.Image != null)
                         {
-                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@ViewBag.Book2.Image))"/>
+                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.Book2.Image))"/>
                         }
                         else
                         {

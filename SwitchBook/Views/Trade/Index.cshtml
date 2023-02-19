@@ -23,7 +23,7 @@
         </div>
         <div class="book_trade_book">
             <h5>На книгу</h5>
-                <div class="book_trade_choice">
+            <div class="book_trade_choice">
                 @foreach (var item in Model.MyBooks)
                 {
                     <form asp-action="Create" method="post" asp-controller="Trade">
@@ -49,10 +49,8 @@
                 }
             </div>
         </div>
-        
+
     </div>
 </div>
 
 <hr/>
-
-

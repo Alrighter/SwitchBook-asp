@@ -1,55 +1,76 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - SwitchBook</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/header.css" />
-    <link rel="stylesheet" href="~/css/booklist.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/css/header.css"/>
+    <link rel="stylesheet" href="~/css/booklist.css"/>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3 header_wrapper">
-            <a class="navbar-brand header_logo_text" asp-area="" asp-page="/Index"> <img src="~/image/Logo.svg" class="header_logo_img"/> <p>SwitchBook</p> </a>
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="
-                    background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e&quot;);
-                " data:image="" svg+xml,%3csvg="" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 30 30" %3e%3cpath="" stroke="rgba%280, 0, 0, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" %3e%3c="" svg%3e");"=""></span>                </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="/Books">Книги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="/MyBooks">Мої книги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="/MyOrders">Пропозиції обміну</a>
-                    </li>
-                </ul>
-                <partial name="_LoginPartial"/>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3 header_wrapper">
+            <a class="navbar-brand header_logo_text" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="~/image/Logo.svg" class="header_logo_img"/>
+            <p>SwitchBook</p>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="background-image: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e&quot;);" data:image="" svg+xml,%3csvg="" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 30 30" %3e%3cpath="" stroke="rgba%280, 0, 0, 0.55%29" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" %3e%3c="" svg%3e");"=""></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Books" asp-action="Index">Книги</a>
+                </li>
+                @{
+                    System.Diagnostics.Debug.Assert(User.Identity != null, "User.Identity != null");
+                }
 
-    <footer class="footer text-muted">
-        <div class="container">
-            Developed by Roman Zhykhor - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">Про нас</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Contacts">Контакти</a>
+                        </li>
+                    }
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="MyBooks" asp-action="Index">Мої книги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="MyOrders" asp-action="Index">Пропозиції обміну</a>
+                    </li>
+                }
+            </ul>
+            <partial name="_LoginPartial"/>
         </div>
-    </footer>
+    </nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<footer class="footer text-muted">
+    <div class="container">
+            Developed by Roman Zhykhor -     <a href="mailto:romanzhykhor@gmail.com">
+                <img src="https://raw.githubusercontent.com/Alrighter/SwitchBook/ac7c6da6b5bb2e0b7f98246665d185d5c87e0407/img/email_icon.svg" alt="Email icon" height="15px">
+            </a> 
+    </div>
+</footer>
 
-    @await RenderSectionAsync("Scripts", required: false)
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", false)
 </body>
 </html>

@@ -10,14 +10,14 @@
     <div class="trade_offers">
         <h3>Отримані пропозиції</h3>
         <div class="trade_offers_overflow">
-            @for (int i = 0; i < Model.Requests.Books1.Count; i++)
+            @for (var i = 0; i < Model.Requests.Books1.Count; i++)
             {
                 <div class="trade_offers_offer">
                     <div class="trade_offers_text">
                         <div class="avaliable_book">
-                            @if (@Model.Requests.Books1[i].Image != null)
+                            @if (Model.Requests.Books1[i].Image != null)
                             {
-                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.Requests.Books1[i].Image))"/>
+                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Requests.Books1[i].Image))"/>
                             }
                             else
                             {
@@ -29,13 +29,13 @@
                                 <h5>@Model.Requests.Books1[i].Author</h5>
                                 <h6>Віддаєте</h6>
                             </div>
-                        
+
                         </div>
                         <div>
                             <div class="avaliable_book">
-                                @if (@Model.Requests.Books2[i].Image != null)
+                                @if (Model.Requests.Books2[i].Image != null)
                                 {
-                                    <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.Requests.Books2[i].Image))"/>
+                                    <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Requests.Books2[i].Image))"/>
                                 }
                                 else
                                 {
@@ -52,9 +52,9 @@
 
                             </div>
                         </div>
-                    
+
                     </div>
-                
+
                     <div class="trade_offers_action">
                         <form asp-action="ConfirmRequest">
                             <input type="hidden" name="OrderId" value="@Model.Requests.Orders[i].Id"/>
@@ -78,14 +78,14 @@
     <div class="trade_offers">
         <h3>Відправлені пропозиції обміну</h3>
         <div class="trade_offers_overflow">
-            @for (int i = 0; i < Model.MyRequests.Books1.Count; i++)
+            @for (var i = 0; i < Model.MyRequests.Books1.Count; i++)
             {
                 <div class="trade_offers_offer">
                     <div class="trade_offers_text">
                         <div class="avaliable_book">
-                            @if (@Model.MyRequests.Books1[i].Image != null)
+                            @if (Model.MyRequests.Books1[i].Image != null)
                             {
-                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.MyRequests.Books1[i].Image))"/>
+                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.MyRequests.Books1[i].Image))"/>
                             }
                             else
                             {
@@ -98,11 +98,11 @@
                                 <h6>Отримуєте</h6>
                             </div>
                         </div>
-                    
+
                         <div class="avaliable_book">
-                            @if (@Model.MyRequests.Books2[i].Image != null)
+                            @if (Model.MyRequests.Books2[i].Image != null)
                             {
-                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.MyRequests.Books2[i].Image))"/>
+                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.MyRequests.Books2[i].Image))"/>
                             }
                             else
                             {
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <div class="trade_offers_action">
                         <a href="/MyOrders/OrderDetails?OrderId=@Model.MyRequests.Orders[i].Id" class="btn btn_book">Деталі</a>
                         <form asp-action="DeleteRequest">
@@ -136,48 +136,47 @@
         <h3>Історія</h3>
         <div class="trade_offers_overflow">
 
-        @for (int i = 0; i < Model.History.Books1.Count; i++)
-        {
-            <div class="trade_offers_offer">
-                <div class="trade_offers_text">
-                    <div class="avaliable_book">
-                        @if (@Model.History.Books1[i].Image != null)
-                        {
-                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.History.Books1[i].Image))"/>
-                        }
-                        else
-                        {
-                            <div class="avaliable_book_image"></div>
-                        }
-                        <div>
-                            <h4>@Model.History.Books1[i].Title</h4>
-                            <hr/>
-                            <h5>@Model.History.Books1[i].Author</h5>
-                            <h6>Отримуєте</h6>
+            @for (var i = 0; i < Model.History.Books1.Count; i++)
+            {
+                <div class="trade_offers_offer">
+                    <div class="trade_offers_text">
+                        <div class="avaliable_book">
+                            @if (Model.History.Books1[i].Image != null)
+                            {
+                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.History.Books1[i].Image))"/>
+                            }
+                            else
+                            {
+                                <div class="avaliable_book_image"></div>
+                            }
+                            <div>
+                                <h4>@Model.History.Books1[i].Title</h4>
+                                <hr/>
+                                <h5>@Model.History.Books1[i].Author</h5>
+                                <h6>Отримуєте</h6>
+                            </div>
+
                         </div>
-                    
-                    </div>
-                
-                    <div class="avaliable_book">
-                        @if (@Model.History.Books2[i].Image != null)
-                        {
-                            <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.History.Books2[i].Image))"/>
-                        }
-                        else
-                        {
-                            <div class="avaliable_book_image"></div>
-                        }
-                        <div>
-                            <h4>@Model.History.Books2[i].Title</h4>
-                            <hr/>
-                            <h5>@Model.History.Books2[i].Author</h5>
-                            <h6>Віддаєте</h6>
+
+                        <div class="avaliable_book">
+                            @if (Model.History.Books2[i].Image != null)
+                            {
+                                <img class="avaliable_book_image" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.History.Books2[i].Image))"/>
+                            }
+                            else
+                            {
+                                <div class="avaliable_book_image"></div>
+                            }
+                            <div>
+                                <h4>@Model.History.Books2[i].Title</h4>
+                                <hr/>
+                                <h5>@Model.History.Books2[i].Author</h5>
+                                <h6>Віддаєте</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        }
+            }
         </div>
     </div>
 }

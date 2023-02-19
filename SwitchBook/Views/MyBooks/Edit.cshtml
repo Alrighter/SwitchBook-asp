@@ -13,47 +13,47 @@
         <div class="col-md-3">
             @if (Model.Image != null)
             {
-                <img style="width: 100%;" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))" />
+                <img style="width: 100%;" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))"/>
             }
         </div>
         <div class="col-md-9">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label">Назва</label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Author" class="control-label">Автор</label>
-                    <input asp-for="Author" class="form-control" />
-                    <span asp-validation-for="Author" class="text-danger"></span>
-                </div>
-                <div class="form-group" style="display: none;">
-                    <label asp-for="OwnerId" class="control-label"></label>
-                    <input asp-for="OwnerId" class="form-control" />
-                    <span asp-validation-for="OwnerId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label">Відгук</label>
-                    <input asp-for="Description" class="form-control" style="word-wrap: break-word;"/>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Image" class="control-label">Обкладинка</label>
-                    <input  name="ImageEdit" type="file" class="form-control" style="height: min-content; padding: 3px;" />
-                </div>
-            
+            <input type="hidden" asp-for="Id"/>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Назва</label>
+                <input asp-for="Title" class="form-control"/>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Author" class="control-label">Автор</label>
+                <input asp-for="Author" class="form-control"/>
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display: none;">
+                <label asp-for="OwnerId" class="control-label"></label>
+                <input asp-for="OwnerId" class="form-control"/>
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Відгук</label>
+                <input asp-for="Description" class="form-control" style="word-wrap: break-word;"/>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label">Обкладинка</label>
+                <input name="ImageEdit" type="file" class="form-control" style="height: min-content; padding: 3px;"/>
+            </div>
+
         </div>
-        
+
     </div>
     <div class="book_buttons">
         <hr/>
-        <input type="submit" value="Зберегти" class="btn btn_book" style="margin: 0px;" />
-        <a asp-action="Index" class="btn btn_book" style="margin: 0px;" >Повернутися без збереження змін</a>
+        <input type="submit" value="Зберегти" class="btn btn_book" style="margin: 0px;"/>
+        <a asp-action="Index" class="btn btn_book" style="margin: 0px;">Повернутися без збереження змін</a>
     </div>
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

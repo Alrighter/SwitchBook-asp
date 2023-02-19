@@ -1,47 +1,47 @@
-﻿ @model SwitchBook.Models.Book
+﻿@model SwitchBook.Models.Book
 
 @{
-    ViewData["Title"] = @Model.Title;
+    ViewData["Title"] = Model.Title;
 }
 
 <h1>Книга "@Model.Title"</h1>
- <h4>Деталі</h4>
- <div class="row book_details">
-     <div class="col-md-3">
-         @if (Model.Image != null)
-         {
-             <img style="width: 100%;" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))" />
-         }
-     </div>
-     <dl class="col-md-9">
-         <dt class = "col-sm-2">
-             Назва
-         </dt>
-         <dd class = "col-sm-10">
-             @Html.DisplayFor(model => model.Title)
-         </dd>
-         <dt class = "col-sm-2">
-             Автор
-         </dt>
-         <dd class = "col-sm-10">
-             @Html.DisplayFor(model => model.Author)
-         </dd>
-         <dt class = "col-sm-2">
-             Власник
-         </dt>
-         <dd class = "col-sm-10">
-             <p>@ViewBag.Owner</p>
-         </dd>
-         <dt class = "col-sm-2">
-             Відгук
-         </dt>
-         <dd class = "col-sm-10">
-             @Html.DisplayFor(model => model.Description)
-         </dd>
-     </dl>
- </div>
- <div class="book_buttons">
-     <hr/>
-     <a asp-action="Index" class="btn btn_book">Повернутися</a>
-     <a href="/Trade?bookId=@Model.Id" class="btn btn_book">Обмінятися</a>
- </div>
+<h4>Деталі</h4>
+<div class="row book_details">
+    <div class="col-md-3">
+        @if (Model.Image != null)
+        {
+            <img style="width: 100%;" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))"/>
+        }
+    </div>
+    <dl class="col-md-9">
+        <dt class="col-sm-2">
+            Назва
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Автор
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt class="col-sm-2">
+            Власник
+        </dt>
+        <dd class="col-sm-10">
+            <p>@ViewBag.Owner</p>
+        </dd>
+        <dt class="col-sm-2">
+            Відгук
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div class="book_buttons">
+    <hr/>
+    <a asp-action="Index" class="btn btn_book">Повернутися</a>
+    <a href="/Trade?bookId=@Model.Id" class="btn btn_book">Обмінятися</a>
+</div>

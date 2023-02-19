@@ -2,9 +2,7 @@
 for details on configuring this project to bundle and minify static web assets. */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-::-webkit-scrollbar {
-    width: 10px;
-}
+::-webkit-scrollbar { width: 10px; }
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, rgba(189, 166, 152, 0) 0%, rgba(189, 166, 152, 1) 30%, rgba(189, 166, 152, 1) 70%, rgba(189, 166, 152, 0) 100%);
@@ -12,51 +10,41 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 a.navbar-brand {
-    white-space: normal;
     text-align: center;
+    white-space: normal;
     word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
-a {
-    color: #312A1B;
-}
+
+a { color: #312A1B; }
 
 .btn-primary {
-    color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+    color: #fff;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+    color: #fff;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-    font-size: 14px;
-}
+
+html { font-size: 14px; }
 
 @media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+    html { font-size: 16px; }
 }
 
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
+.border-top { border-top: 1px solid #e5e5e5; }
 
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
 
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
 button.accept-policy {
     font-size: 1rem;
@@ -65,22 +53,28 @@ button.accept-policy {
 
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
-    position: relative;
     min-height: 100%;
+    position: relative;
 }
 
 body {
+    background: #E6E4E7 !important;
+    font-family: Montserrat;
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    font-family: Montserrat;
-    background: #E6E4E7 !important;
 }
 
 .footer {
-    position: absolute;
     bottom: 0;
-    width: 100%;
-    white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+}
+
+a :hover {
+    color: black !important;
+    text-decoration: none !important;
 }
