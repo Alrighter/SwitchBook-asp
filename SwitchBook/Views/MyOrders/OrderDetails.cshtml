@@ -29,7 +29,12 @@
                         <p>Автор: @ViewBag.Book1.Author</p>
                         <p>Відгук: @ViewBag.Book1.Description</p>
                         <p>Місто: @ViewBag.Address1.City</p>
-                        <p>Номер телефону: @ViewBag.Address1.PhoneNumber</p>
+                        <p>Поштовий індекс: @ViewBag.Address1.PostalCode</p>
+                        @if (ViewBag.Order.IsConfirm)
+                        {
+                            <p>Власник: @ViewBag.Owner1.UserName</p>
+                            <p>Номер телефону: @ViewBag.Address1.PhoneNumber</p>
+                        }
                     </div>
                 </div>
 
@@ -56,7 +61,12 @@
                         <p>Автор: @ViewBag.Book2.Author</p>
                         <p>Відгук: @ViewBag.Book2.Description</p>
                         <p>Місто: @ViewBag.Address2.City</p>
-                        <p>Номер телефону: @ViewBag.Address2.PhoneNumber</p>
+                        <p>Поштовий індекс: @ViewBag.Address2.PostalCode</p>
+                        @if (ViewBag.Order.IsConfirm)
+                        {
+                                <p>Власник: @ViewBag.Owner2.UserName</p>
+                                <p>Номер телефону: @ViewBag.Address2.PhoneNumber</p>
+                        }
                     </div>
                 </div>
             </div>

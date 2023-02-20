@@ -68,13 +68,18 @@ namespace SwitchBook.Controllers
         public async Task<IActionResult> OrderDetails(int OrderId)
         {
             var order = await _db.Orders.FirstOrDefaultAsync(x => x.Id == OrderId);
+            var book1 = await _db.Books.FirstOrDefaultAsync(x => x.Id == order.FirstBookId);
+            var book2 = await _db.Books.FirstOrDefaultAsync(x => x.Id == order.LastBookId);
             if (order == null)
                 return NotFound();
             ViewBag.OrderId = order.Id;
-            ViewBag.Book1 = await _db.Books.FirstOrDefaultAsync(x => x.Id == order.FirstBookId);
-            ViewBag.Book2 = await _db.Books.FirstOrDefaultAsync(x => x.Id == order.LastBookId);
+            ViewBag.Book1 = book1;
+            ViewBag.Book2 = book2;
             ViewBag.Address1 = await _db.Address.FirstOrDefaultAsync(x => x.Id == order.FirstAddressId);
             ViewBag.Address2 = await _db.Address.FirstOrDefaultAsync(x => x.Id == order.LastAddressId);
+            ViewBag.Order = order;
+            ViewBag.Owner1 = await _db.Users.FirstOrDefaultAsync(x => x.Id == book1.OwnerId);
+            ViewBag.Owner2 = await _db.Users.FirstOrDefaultAsync(x => x.Id == book2.OwnerId);
             return View();
         }
         [HttpPost]

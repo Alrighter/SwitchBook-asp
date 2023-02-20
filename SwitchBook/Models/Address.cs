@@ -1,4 +1,6 @@
-﻿namespace SwitchBook.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SwitchBook.Models
 {
     public class Address
     {
@@ -9,6 +11,9 @@
         public string PostalCode { get; set; }
         public string PhoneNumber { get; set; }
 
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
         public User User { get; set; }
+
     }
 }

@@ -38,6 +38,7 @@ namespace SwitchBook.Areas.Identity.Pages.Account.Manage
 
         [TempData]
         public string StatusMessage { get; set; }
+        public string Link { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -92,20 +93,24 @@ namespace SwitchBook.Areas.Identity.Pages.Account.Manage
             var email = await _userManager.GetEmailAsync(user);
             if (Input.NewEmail != email)
             {
-                var userId = await _userManager.GetUserIdAsync(user);
+                var newEmail = Input.NewEmail;
                 var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = Url.Page(
-                    "/Account/ConfirmEmailChange",
-                    pageHandler: null,
-                    values: new { userId = userId, email = Input.NewEmail, code = code },
-                    protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                StatusMessage = "Посилання для підтвердження зміни електронної пошти надіслано. Будь ласка, перевірте свою електронну пошту";
+                //change email
+                var result = await _userManager.ChangeEmailAsync(user, newEmail, code);
+                if (!result.Succeeded)
+                {
+                    StatusMessage = "Електронну пошту не змінено.";
+                }
+                else
+                {
+                    await _signInManager.RefreshSignInAsync(user);
+                    StatusMessage = "Електронну пошту змінено успішно.";
+                    return RedirectToPage();
+                }
+
+
+
                 return RedirectToPage();
             }
 
@@ -129,19 +134,30 @@ namespace SwitchBook.Areas.Identity.Pages.Account.Manage
 
             var userId = await _userManager.GetUserIdAsync(user);
             var email = await _userManager.GetEmailAsync(user);
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var callbackUrl = Url.Page(
-                "/Account/ConfirmEmail",
-                pageHandler: null,
-                values: new { area = "Identity", userId = userId, code = code },
-                protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            //var callbackUrl = Url.Page(
+            //    "/Account/ConfirmEmail",
+            //    pageHandler: null,
+            //    values: new { area = "Identity", userId = userId, code = code },
+            //    protocol: Request.Scheme);
+            //await _emailSender.SendEmailAsync(
+            //    email,
+            //    "Confirm your email",
+            //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            StatusMessage = "Підтвердження надіслано на електронну пошту. Будь ласка, перевірте свою електронну пошту.";
+            //change email without confirmaion
+            var result = await _userManager.ChangeEmailAsync(user, email, email);
+            if (!result.Succeeded)
+            {
+                userId = await _userManager.GetUserIdAsync(user);
+                throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
+            }
+
+            await _signInManager.RefreshSignInAsync(user);
+
+            StatusMessage = "Електронну пошту змінено успішно.";
+
             return RedirectToPage();
         }
     }

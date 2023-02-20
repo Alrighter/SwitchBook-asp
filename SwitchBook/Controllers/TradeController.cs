@@ -59,10 +59,21 @@ namespace SwitchBook.Controllers
                 return Redirect("/Home");
             }
 
-            var firstAddress = await _db.Address.FirstOrDefaultAsync(x =>
-                x.Id == _db.Users.FirstOrDefault(x => x.Id == _db.Books.Find(bookId).OwnerId).AddressId);
-            var secondAddress = await _db.Address.FirstOrDefaultAsync(x =>
-                x.Id == _db.Users.FirstOrDefault(x => x.Id == _db.Books.Find(myBookId).OwnerId).AddressId);
+            if (bookId == myBookId)
+            {
+                return RedirectToAction("Index", "Books");
+            }
+
+            //get first book owner id 
+            var firstBookOwnerId = await _db.Books.FirstOrDefaultAsync(x => x.Id == bookId);
+            //get second book owner id
+            var secondBookOwnerId = await _db.Books.FirstOrDefaultAsync(x => x.Id == myBookId);
+
+            //get first book owner address
+            var firstAddress = await _db.Address.FirstOrDefaultAsync(x => x.UserId == firstBookOwnerId.OwnerId);
+            //get second book owner address
+            var secondAddress = await _db.Address.FirstOrDefaultAsync(x => x.UserId == secondBookOwnerId.OwnerId);
+
             Order newOrder = new Order()
             {
                 FirstBookId = bookId,

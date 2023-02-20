@@ -24,13 +24,19 @@ namespace SwitchBook
         [AllowAnonymous]
         public async Task<IActionResult> Index(string query)
         {
-            if (string.IsNullOrEmpty(query))
-            {
-                return View(await _context.Books.ToListAsync());
-            }
             var books = await _context.Books.Where(x =>
                 EF.Functions.Like(x.Title, $"%{query}%") || EF.Functions.Like(x.Author, $"%{query}%") ||
                 EF.Functions.Like(x.Description, $"%{query}%")).ToListAsync();
+
+            var orders = await _context.Orders.ToListAsync();
+            foreach (var order in orders)
+            {
+                var mybook = await _context.Books.FirstOrDefaultAsync(x => x.Id == order.FirstBookId);
+                    books.Remove(mybook);
+                    mybook = await _context.Books.FirstOrDefaultAsync(x => x.Id == order.LastBookId);
+                    books.Remove(mybook);
+            }
+
             return View(books);
         }
 

@@ -38,8 +38,8 @@ public class IndexModel : PageModel
     {
         var userName = await _userManager.GetUserNameAsync(user);
 
-        //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-        var address = _db.Address.FirstOrDefault(x => x.Id == _userManager.GetUserAsync(User).Result.AddressId);
+        var address = await _db.Address.FirstOrDefaultAsync(x => x.UserId == user.Id);
+        
         Username = userName;
         if (address != null)
         {
@@ -79,7 +79,7 @@ public class IndexModel : PageModel
 
         if (Input != null)
         {
-            var address = await _db.Address.FirstOrDefaultAsync(x => x.Id == user.AddressId);
+            var address = await _db.Address.FirstOrDefaultAsync(x => x.UserId == user.Id);
 
             address.City = Input.City;
             address.Region = Input.Region;

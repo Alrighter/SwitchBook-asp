@@ -25,6 +25,17 @@ namespace SwitchBook.Controllers
             
             var ownerId = await _context.Users.FirstAsync(x => x.UserName == User.Identity.Name);
             var mybooks = await _context.Books.Where(x => x.OwnerId == ownerId.Id).ToListAsync();
+
+            //check if book was in order table and remove from it mybook variable by id if order was confirmed
+            var orders = await _context.Orders.ToListAsync();
+            foreach (var order in orders)
+            {
+                var mybook = await _context.Books.FirstOrDefaultAsync(x => x.Id == order.FirstBookId);
+                mybooks.Remove(mybook);
+                mybook = await _context.Books.FirstOrDefaultAsync(x => x.Id == order.LastBookId);
+                mybooks.Remove(mybook);
+            }
+
             return View(mybooks);
         }
         public async Task<IActionResult> Edit(int? id)

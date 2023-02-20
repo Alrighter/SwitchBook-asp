@@ -84,10 +84,10 @@ public class RegisterModel : PageModel
                 PostalCode = Input.PostalCode,
                 PhoneNumber = Input.PhoneNumber,
                 Street = Input.Street,
+                UserId = user.Id
             };
             await _db.AddAsync(address);
             await _db.SaveChangesAsync();
-            user.AddressId = address.Id;
             var result = await _userManager.CreateAsync(user, Input.Password);
             if (result.Succeeded)
             {
