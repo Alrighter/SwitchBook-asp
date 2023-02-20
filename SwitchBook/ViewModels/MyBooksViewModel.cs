@@ -1,5 +1,5 @@
-﻿using SwitchBook.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SwitchBook.Models;
 
 namespace SwitchBook.ViewModels;
 

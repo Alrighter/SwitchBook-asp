@@ -19,10 +19,9 @@ public class MyBooksController : Controller
     {
         _context = context;
     }
+
     public async Task<IActionResult> Index()
     {
-           
-            
         var ownerId = await _context.Users.FirstAsync(x => x.UserName == User.Identity.Name);
         var mybooks = await _context.Books.Where(x => x.OwnerId == ownerId.Id).ToListAsync();
 
@@ -38,28 +37,22 @@ public class MyBooksController : Controller
 
         return View(mybooks);
     }
+
     public async Task<IActionResult> Edit(int? id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        if (id == null) return NotFound();
 
         var book = await _context.Books.FindAsync(id);
-        if (book == null)
-        {
-            return NotFound();
-        }
+        if (book == null) return NotFound();
         return View(book);
     }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,OwnerId,Description, Image")] Book book, IFormFile ImageEdit)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,OwnerId,Description, Image")] Book book,
+        IFormFile ImageEdit)
     {
-        if (id != book.Id)
-        {
-            return NotFound();
-        }
+        if (id != book.Id) return NotFound();
 
         if (!ModelState.IsValid) return View(book);
 
@@ -73,6 +66,7 @@ public class MyBooksController : Controller
                 {
                     imageData = binaryReader.ReadBytes((int)ImageEdit.Length);
                 }
+
                 // установка массива байтов
                 book.Image = imageData;
             }
@@ -90,35 +84,27 @@ public class MyBooksController : Controller
         catch (DbUpdateConcurrencyException)
         {
             if (!BookExists(book.Id))
-            {
                 return NotFound();
-            }
-            else
-            {
-                throw;
-            }
+            throw;
         }
+
         return RedirectToAction(nameof(Index));
     }
+
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        if (id == null) return NotFound();
 
         var book = await _context.Books
             .FirstOrDefaultAsync(m => m.Id == id);
-        if (book == null)
-        {
-            return NotFound();
-        }
+        if (book == null) return NotFound();
 
         return View(book);
     }
 
     // POST: Books/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpPost]
+    [ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {

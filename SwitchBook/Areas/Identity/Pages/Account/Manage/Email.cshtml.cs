@@ -9,11 +9,11 @@ using SwitchBook.Models;
 
 namespace SwitchBook.Areas.Identity.Pages.Account.Manage;
 
-public partial class EmailModel : PageModel
+public class EmailModel : PageModel
 {
-    private readonly UserManager<User> _userManager;
-    private readonly SignInManager<User> _signInManager;
     private readonly IEmailSender _emailSender;
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
 
     public EmailModel(
         UserManager<User> userManager,
@@ -31,20 +31,11 @@ public partial class EmailModel : PageModel
 
     public bool IsEmailConfirmed { get; set; }
 
-    [TempData]
-    public string StatusMessage { get; set; }
+    [TempData] public string StatusMessage { get; set; }
+
     public string Link { get; set; }
 
-    [BindProperty]
-    public InputModel Input { get; set; }
-
-    public class InputModel
-    {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "New email")]
-        public string NewEmail { get; set; }
-    }
+    [BindProperty] public InputModel Input { get; set; }
 
     private async Task LoadAsync(User user)
     {
@@ -53,7 +44,7 @@ public partial class EmailModel : PageModel
 
         Input = new InputModel
         {
-            NewEmail = email,
+            NewEmail = email
         };
 
         IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
@@ -62,10 +53,7 @@ public partial class EmailModel : PageModel
     public async Task<IActionResult> OnGetAsync()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-        }
+        if (user == null) return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
 
         await LoadAsync(user);
         return Page();
@@ -74,10 +62,7 @@ public partial class EmailModel : PageModel
     public async Task<IActionResult> OnPostChangeEmailAsync()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-        }
+        if (user == null) return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
 
         if (!ModelState.IsValid)
         {
@@ -105,7 +90,6 @@ public partial class EmailModel : PageModel
             }
 
 
-
             return RedirectToPage();
         }
 
@@ -116,10 +100,7 @@ public partial class EmailModel : PageModel
     public async Task<IActionResult> OnPostSendVerificationEmailAsync()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-        }
+        if (user == null) return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
 
         if (!ModelState.IsValid)
         {
@@ -146,7 +127,8 @@ public partial class EmailModel : PageModel
         if (!result.Succeeded)
         {
             userId = await _userManager.GetUserIdAsync(user);
-            throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
+            throw new InvalidOperationException(
+                $"Unexpected error occurred setting email for user with ID '{userId}'.");
         }
 
         await _signInManager.RefreshSignInAsync(user);
@@ -154,5 +136,13 @@ public partial class EmailModel : PageModel
         StatusMessage = "Електронну пошту змінено успішно.";
 
         return RedirectToPage();
+    }
+
+    public class InputModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "New email")]
+        public string NewEmail { get; set; }
     }
 }

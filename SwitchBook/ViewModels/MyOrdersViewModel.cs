@@ -10,6 +10,7 @@ public class OrderInfo
 
     public List<Order> Orders { get; set; }
 }
+
 public class MyOrdersViewModel
 {
     public OrderInfo Requests { get; set; }

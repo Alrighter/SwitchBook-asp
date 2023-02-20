@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Diagnostics
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -12,7 +13,7 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3 header_wrapper">
-            <a class="navbar-brand header_logo_text" asp-area="" asp-controller="Home" asp-action="Index">
+        <a class="navbar-brand header_logo_text" asp-area="" asp-controller="Home" asp-action="Index">
             <img src="~/image/Logo.svg" class="header_logo_img"/>
             <p>SwitchBook</p>
         </a>
@@ -26,18 +27,18 @@
                     <a class="nav-link text-dark" asp-controller="Books" asp-action="Index">Книги</a>
                 </li>
                 @{
-                    System.Diagnostics.Debug.Assert(User.Identity != null, "User.Identity != null");
+                    Debug.Assert(User.Identity != null, "User.Identity != null");
                 }
 
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">Про нас</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Contacts">Контакти</a>
-                        </li>
-                    }
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="About">Про нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Contacts">Контакти</a>
+                    </li>
+                }
 
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -61,9 +62,10 @@
 
 <footer class="footer text-muted">
     <div class="container">
-            Developed by Roman Zhykhor -     <a href="mailto:romanzhykhor@gmail.com">
-                <img src="https://raw.githubusercontent.com/Alrighter/SwitchBook/ac7c6da6b5bb2e0b7f98246665d185d5c87e0407/img/email_icon.svg" alt="Email icon" height="15px">
-            </a> 
+        Developed by Roman Zhykhor -
+        <a href="mailto:romanzhykhor@gmail.com">
+            <img src="https://raw.githubusercontent.com/Alrighter/SwitchBook/ac7c6da6b5bb2e0b7f98246665d185d5c87e0407/img/email_icon.svg" alt="Email icon" height="15px">
+        </a>
     </div>
 </footer>
 

@@ -38,7 +38,7 @@ public class IndexModel : PageModel
         var userName = await _userManager.GetUserNameAsync(user);
 
         var address = await _db.Address.FirstOrDefaultAsync(x => x.UserId == user.Id);
-        
+
         Username = userName;
         if (address != null)
         {

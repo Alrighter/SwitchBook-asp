@@ -43,19 +43,13 @@ public class BooksController : Controller
     // GET: Books/Details/5
     public async Task<IActionResult> Details(int? id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        if (id == null) return NotFound();
 
         var book = await _context.Books
             .FirstOrDefaultAsync(m => m.Id == id);
         var owner = await _context.Users.FirstOrDefaultAsync(x => x.Id == book.OwnerId);
         ViewBag.Owner = owner.UserName;
-        if (book == null)
-        {
-            return NotFound();
-        }
+        if (book == null) return NotFound();
 
         return View(book);
     }
@@ -74,15 +68,14 @@ public class BooksController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(BookViewModel bookvm)
     {
-            
         if (ModelState.IsValid)
         {
-            Book book = new Book()
+            var book = new Book
             {
                 Title = bookvm.Title,
                 Author = bookvm.Author,
                 Description = bookvm.Description,
-                OwnerId = _context.Users.First(x=>x.UserName == User.Identity.Name).Id,
+                OwnerId = _context.Users.First(x => x.UserName == User.Identity.Name).Id
             };
             if (bookvm.Image != null)
             {
@@ -92,6 +85,7 @@ public class BooksController : Controller
                 {
                     imageData = binaryReader.ReadBytes((int)bookvm.Image.Length);
                 }
+
                 // установка массива байтов
                 book.Image = imageData;
             }
@@ -100,22 +94,17 @@ public class BooksController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
         return View();
     }
 
     // GET: Books/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        if (id == null) return NotFound();
 
         var book = await _context.Books.FindAsync(id);
-        if (book == null)
-        {
-            return NotFound();
-        }
+        if (book == null) return NotFound();
         return View(book);
     }
 
@@ -126,10 +115,7 @@ public class BooksController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,OwnerId,Description,Image")] Book book)
     {
-        if (id != book.Id)
-        {
-            return NotFound();
-        }
+        if (id != book.Id) return NotFound();
 
         if (ModelState.IsValid)
         {
@@ -141,39 +127,31 @@ public class BooksController : Controller
             catch (DbUpdateConcurrencyException)
             {
                 if (!BookExists(book.Id))
-                {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
+
             return RedirectToAction(nameof(Index));
         }
+
         return View(book);
     }
 
     // GET: Books/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        if (id == null) return NotFound();
 
         var book = await _context.Books
             .FirstOrDefaultAsync(m => m.Id == id);
-        if (book == null)
-        {
-            return NotFound();
-        }
+        if (book == null) return NotFound();
 
         return View(book);
     }
 
     // POST: Books/Delete/5
-    [HttpPost, ActionName("Delete")]
+    [HttpPost]
+    [ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
