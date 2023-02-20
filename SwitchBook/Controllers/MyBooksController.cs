@@ -61,38 +61,44 @@ namespace SwitchBook.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(book);
+
+            try
             {
-                try
+                if (ImageEdit != null)
                 {
-                    if (ImageEdit != null)
+                    byte[] imageData = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(ImageEdit.OpenReadStream()))
                     {
-                        byte[] imageData = null;
-                        // считываем переданный файл в массив байтов
-                        using (var binaryReader = new BinaryReader(ImageEdit.OpenReadStream()))
-                        {
-                            imageData = binaryReader.ReadBytes((int)ImageEdit.Length);
-                        }
-                        // установка массива байтов
-                        book.Image = imageData;
+                        imageData = binaryReader.ReadBytes((int)ImageEdit.Length);
                     }
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
+                    // установка массива байтов
+                    book.Image = imageData;
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!BookExists(book.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //find book no tracked
+                    var originalBook = await _context.Books.AsNoTracking().FirstOrDefaultAsync(x => x.Id == book.Id);
+
+                    book.Image = originalBook.Image;
                 }
-                return RedirectToAction(nameof(Index));
+
+                _context.Update(book);
+                await _context.SaveChangesAsync();
             }
-            return View(book);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BookExists(book.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int? id)
         {

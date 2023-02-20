@@ -77,6 +77,8 @@ public class RegisterModel : PageModel
                 user.Avatar = imageData;
             }
 
+            var result = await _userManager.CreateAsync(user, Input.Password);
+
             var address = new Address
             {
                 Region = Input.Region,
@@ -88,7 +90,7 @@ public class RegisterModel : PageModel
             };
             await _db.AddAsync(address);
             await _db.SaveChangesAsync();
-            var result = await _userManager.CreateAsync(user, Input.Password);
+            
             if (result.Succeeded)
             {
                 _logger.LogInformation("User created a new account with password.");

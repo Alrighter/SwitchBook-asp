@@ -12,8 +12,6 @@ namespace SwitchBook.Models
         public string PhoneNumber { get; set; }
 
         public string UserId { get; set; }
-        [ForeignKey("UserId")]
         public User User { get; set; }
-
     }
 }
