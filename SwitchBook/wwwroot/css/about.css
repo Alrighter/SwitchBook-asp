@@ -1,24 +1,24 @@
 ﻿.about_me_filling, .idea_for_million_filling, .about_me_title, .idea_for_million_title {
+    color: #4C4333;
     font-family: Montserrat;
     font-style: normal;
-    color: #4C4333;
 }
 
 .about_me_filling, .idea_for_million_filling {
-    font-weight: 500;
     font-size: 30px;
+    font-weight: 500;
     line-height: 41px;
 }
 
 .about_me_title, .idea_for_million_title {
-    font-weight: 600;
     font-size: 40px;
+    font-weight: 600;
     line-height: 59px;
 }
 
 .first_row, .second_row {
-    flex-wrap: wrap;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -28,15 +28,13 @@
 }
 
 .arrow1, .arrow2 {
-    mix-blend-mode: luminosity;
-    max-width: 100%;
-    max-height: 300px;
     margin: 5%;
+    max-height: 300px;
+    max-width: 100%;
+    mix-blend-mode: luminosity;
 }
 
-.arrow2 {
-    transform: rotate(180deg);
-}
+.arrow2 { transform: rotate(180deg); }
 
 @media only screen and (max-width: 1100px) {
     .text1, .text2 {
@@ -44,26 +42,22 @@
         word-wrap: break-word;
     }
 
-    .arrow1, .arrow2 {
-        height: 40%
-    }
+    .arrow1, .arrow2 { height: 40% }
 
-    .arrow1 {
-        margin-left: 40%;
-    }
+    .arrow1 { margin-left: 40%; }
 
     .arrow2 {
-        width: 223px;
         height: 274px;
-        margin-top: -250px;
         margin-left: 20%;
+        margin-top: -250px;
+        width: 223px;
     }
 }
 
 @media only screen and (max-width: 600px) {
     .about_me_title, .idea_for_million_title {
-        font-weight: 700;
         font-size: 28px;
+        font-weight: 700;
         line-height: 30px;
         margin-top: -25px;
     }
@@ -73,18 +67,14 @@
         line-height: 26px;
     }
 
-    .idea_for_million_title {
-        margin-top: 0;
-    }
+    .idea_for_million_title { margin-top: 0; }
 
-    .arrow1 {
-        margin-left: 40%;
-    }
+    .arrow1 { margin-left: 40%; }
 
     .arrow2 {
-        width: 210px;
         height: 210px;
-        margin-top: -250px;
         margin-left: 10%;
+        margin-top: -250px;
+        width: 210px;
     }
 }

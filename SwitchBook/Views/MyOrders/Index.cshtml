@@ -175,7 +175,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (@Model.History.Orders[i].IsConfirm)
+                    @if (Model.History.Orders[i].IsConfirm)
                     {
                         <div class="trade_offers_action">
                             <a href="/MyOrders/OrderDetails?OrderId=@Model.History.Orders[i].Id" class="btn btn_book">Деталі</a>

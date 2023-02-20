@@ -1,48 +1,46 @@
 ﻿.home_page {
+    align-content: center;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
 
+    flex-wrap: wrap;
     justify-content: center;
-    align-content: center;
 }
 
 .text {
     position: relative;
-    word-wrap: break-word;
     width: 40%;
+    word-wrap: break-word;
 }
 
 .home_text_title {
+    color: #4C4333;
     font-family: Montserrat;
+    font-size: 40px;
     font-style: normal;
     font-weight: 600;
-    font-size: 40px;
     line-height: 59px;
-    color: #4C4333;
 }
 
 .home_text_filling {
-    margin-top: 15px;
+    color: #4C4333;
     font-family: Montserrat;
+    font-size: 30px;
     font-style: normal;
     font-weight: 500;
-    font-size: 30px;
     line-height: 40px;
-    color: #4C4333;
+    margin-top: 15px;
 }
 
 
 @media only screen and (max-width: 1248px) {
-    .text {
-        width: 100%;
-    }
+    .text { width: 100%; }
 }
 
 @media only screen and (max-width: 725px) {
     .home_text_title {
-        font-weight: 700;
         font-size: 28px;
+        font-weight: 700;
         line-height: 30px;
     }
 
@@ -53,8 +51,8 @@
 
     .books_on_homepage {
         height: 80%;
-        width: 80%;
         margin-left: 10%;
         margin-top: 10px;
+        width: 80%;
     }
 }
