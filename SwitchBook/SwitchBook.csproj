@@ -10,15 +10,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.3" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 		<PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -33,16 +26,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Home\Contacts.cshtml" />
+		<UpToDateCheckInput Remove="Views\Home\Contacts.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Views\Home\About.cshtml" />
-	  <_ContentIncludedByDefault Remove="Views\Home\Contacts.cshtml" />
+		<_ContentIncludedByDefault Remove="Views\Home\About.cshtml" />
+		<_ContentIncludedByDefault Remove="Views\Home\Contacts.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Home\About.cshtml" />
+		<UpToDateCheckInput Remove="Views\Home\About.cshtml" />
 	</ItemGroup>
 
 </Project>

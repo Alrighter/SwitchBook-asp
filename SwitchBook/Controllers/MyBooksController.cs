@@ -25,7 +25,6 @@ public class MyBooksController : Controller
         var ownerId = await _context.Users.FirstAsync(x => x.UserName == User.Identity.Name);
         var mybooks = await _context.Books.Where(x => x.OwnerId == ownerId.Id).ToListAsync();
 
-        //check if book was in order table and remove from it mybook variable by id if order was confirmed
         var orders = await _context.Orders.ToListAsync();
         foreach (var order in orders)
         {
@@ -61,18 +60,15 @@ public class MyBooksController : Controller
             if (ImageEdit != null)
             {
                 byte[] imageData = null;
-                // считываем переданный файл в массив байтов
                 using (var binaryReader = new BinaryReader(ImageEdit.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)ImageEdit.Length);
                 }
 
-                // установка массива байтов
                 book.Image = imageData;
             }
             else
             {
-                //find book no tracked
                 var originalBook = await _context.Books.AsNoTracking().FirstOrDefaultAsync(x => x.Id == book.Id);
 
                 book.Image = originalBook.Image;
@@ -102,7 +98,6 @@ public class MyBooksController : Controller
         return View(book);
     }
 
-    // POST: Books/Delete/5
     [HttpPost]
     [ActionName("Delete")]
     [ValidateAntiForgeryToken]

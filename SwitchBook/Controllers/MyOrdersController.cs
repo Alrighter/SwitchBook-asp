@@ -41,8 +41,6 @@ public class MyOrdersController : Controller
             b2M.Add(await _db.Books.FirstOrDefaultAsync(x => x.Id == order.LastBookId));
         }
 
-        //var b1 = await _db.Books.Where(x=>orderRequest.Select(b=>b.FirstBookId).Contains(x.Id)).ToListAsync();
-        //var b2 = await _db.Books.Where(x=>orderRequest.Select(b=>b.LastBookId).Contains(x.Id)).ToListAsync();
         var orderHistory = await _db.Orders.Where(x =>
             (myBooks.Select(b => b.Id).Contains(x.FirstBookId) || myBooks.Select(b => b.Id).Contains(x.LastBookId)) &&
             x.IsConfirm == true).ToListAsync();
@@ -55,8 +53,6 @@ public class MyOrdersController : Controller
             b2H.Add(await _db.Books.FirstOrDefaultAsync(x => x.Id == order.LastBookId));
         }
 
-        //var b1H = await _db.Books.Where(x => orderHistory.Select(b => b.FirstBookId).Contains(x.Id)).ToListAsync();
-        //var b2H = await _db.Books.Where(x => orderHistory.Select(b => b.LastBookId).Contains(x.Id)).ToListAsync();
         var viewModel = new MyOrdersViewModel
         {
             Requests = new OrderInfo { Books1 = b1, Books2 = b2, Orders = orderRequest },

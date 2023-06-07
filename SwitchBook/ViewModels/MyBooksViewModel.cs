@@ -6,5 +6,4 @@ namespace SwitchBook.ViewModels;
 public class MyBooksViewModel
 {
     public List<Book> MyBooks { get; set; }
-    //public List<Order>
 }

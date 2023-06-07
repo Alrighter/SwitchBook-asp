@@ -5,7 +5,6 @@ public class OrderViewModel
     public int FirstBookId { get; set; }
     public int LastBookId { get; set; }
 
-    //Address
     public string Region { get; set; }
 
     public string City { get; set; }

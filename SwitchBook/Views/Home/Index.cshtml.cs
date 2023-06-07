@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace SwitchBook.Pages;
+namespace SwitchBook.Views.Home;
 
 public class IndexModel : PageModel
 {

@@ -76,7 +76,6 @@ public class EmailModel : PageModel
             var newEmail = Input.NewEmail;
             var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
 
-            //change email
             var result = await _userManager.ChangeEmailAsync(user, newEmail, code);
             if (!result.Succeeded)
             {
@@ -110,19 +109,7 @@ public class EmailModel : PageModel
 
         var userId = await _userManager.GetUserIdAsync(user);
         var email = await _userManager.GetEmailAsync(user);
-        //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        //var callbackUrl = Url.Page(
-        //    "/Account/ConfirmEmail",
-        //    pageHandler: null,
-        //    values: new { area = "Identity", userId = userId, code = code },
-        //    protocol: Request.Scheme);
-        //await _emailSender.SendEmailAsync(
-        //    email,
-        //    "Confirm your email",
-        //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-        //change email without confirmaion
         var result = await _userManager.ChangeEmailAsync(user, email, email);
         if (!result.Succeeded)
         {

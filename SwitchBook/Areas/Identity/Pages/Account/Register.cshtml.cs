@@ -67,13 +67,11 @@ public class RegisterModel : PageModel
             if (Input.Avatar != null)
             {
                 byte[] imageData = null;
-                // считываем переданный файл в массив байтов
                 using (var binaryReader = new BinaryReader(Input.Avatar.OpenReadStream()))
                 {
                     imageData = binaryReader.ReadBytes((int)Input.Avatar.Length);
                 }
 
-                // установка массива байтов
                 user.Avatar = imageData;
             }
 
@@ -116,7 +114,6 @@ public class RegisterModel : PageModel
             foreach (var error in result.Errors) ModelState.AddModelError(string.Empty, error.Description);
         }
 
-        // If we got this far, something failed, redisplay form
         return Page();
     }
 

@@ -91,16 +91,6 @@ public class IndexModel : PageModel
             await _db.SaveChangesAsync();
         }
 
-        //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-        //if (Input.PhoneNumber != phoneNumber)
-        //{
-        //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-        //    if (!setPhoneResult.Succeeded)
-        //    {
-        //        StatusMessage = "Unexpected error when trying to set phone number.";
-        //        return RedirectToPage();
-        //    }
-        //}
         var setUserNameResult = await _userManager.SetUserNameAsync(user, Input.UserName);
         if (!setUserNameResult.Succeeded)
         {
